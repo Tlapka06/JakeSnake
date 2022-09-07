@@ -71,7 +71,10 @@ def main(screen):
 	def exit_handler(signum, frame):
 		data.save()
 		exit()
-	signal.signal(signal.SIGHUP, exit_handler)
+    if os.name == "nt":
+        signal.signal(signal.SIGBREAK, exit_handler)
+    else:
+        signal.signal(signal.SIGBREAK, exit_handler)
 	signal.signal(signal.SIGTERM, exit_handler)
 	
 	while True:
