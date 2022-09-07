@@ -1,5 +1,5 @@
 # JakeSnake
-Simple snake written in python
+Simple snake written in Python
 
 ## Build
 On unix operating systems execute:  

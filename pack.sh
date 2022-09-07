@@ -1,4 +1,4 @@
 #!/bin/bash
 
-pyinstaller -y snake.py
-cp README.md build/snake/
+pyinstaller -y jakesnake.py
+cp README.md dist/jakesnake/
