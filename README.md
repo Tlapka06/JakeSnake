@@ -1,23 +1,26 @@
 # JakeSnake
-Simple snake written in Python
 
-## Build
-On unix operating systems execute:  
+Simple snake written in Python.
+
+## Dependencies
+
+- appdirs  
 ```
-pip3 install pyinstaller appdirs
-./pack.sh
+pip3 install appdirs
 ```
 
-On Windows execute:  
-```
-pip3 install pyinstaller appdirs
-pack.bat
-```
+## Pack
+
+JakeSnake is packed for release by PyInstaller.
+
+Read [PyInstaller documentation](https://pyinstaller.org/en/stable/usage.html) for more info.
 
 ## Known bugs
+
 - Lower right corner cannot be drawn. (You won't see what's there)
 
 ## License
+
 Copyright © 2022 Jakub Janík
 	
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
