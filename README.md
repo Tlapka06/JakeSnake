@@ -1,4 +1,4 @@
-# SNAKE
+# JakeSnake
 Simple snake written in python
 
 ## Build
@@ -16,8 +16,6 @@ pack.bat
 
 ## Known bugs
 - Lower right corner cannot be drawn. (You won't see what's there)
-
-If you find another bug, please send me an email to <mail.me@anidor.org>
 
 ## License
 Copyright © 2022 Jakub Janík
