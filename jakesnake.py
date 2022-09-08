@@ -22,8 +22,7 @@ KEYBINDINGS = {
 	ord("a") : snakegame.SnakeDirection.LEFT,
 	# RIGHT
 	curses.KEY_RIGHT : snakegame.SnakeDirection.RIGHT,
-	ord("d") : snakegame.SnakeDirection.RIGHT,
-	# exit
+	ord("d") : snakegame.SnakeDirection.RIGHT
 }
 APP_NAME = "snake"
 APP_AUTHOR = "jakubjanik"
@@ -94,16 +93,20 @@ def main(screen):
 	
 	while True:
 		# input
-		# while there is input available, process it
+		user_input = screen.getch()			
+		if KEYBINDINGS.__contains__(user_input):
+			snake.direction = KEYBINDINGS[user_input]
+		elif user_input == ord("q"):
+			snake.lost = True
+		
+		# clears all repeats of this key
 		while True:
-			user_input = screen.getch()
-			if user_input == -1:
+			repeating_input = screen.getch()
+			if repeating_input == -1:
 				break
-			
-			if KEYBINDINGS.__contains__(user_input):
-				snake.direction = KEYBINDINGS[user_input]
-			elif user_input == ord("q"):
-				snake.lost = True
+			elif repeating_input != user_input:
+				curses.ungetch(repeating_input)
+				break
 		
 		# update
 		snake.move()
