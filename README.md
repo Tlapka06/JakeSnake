@@ -2,7 +2,12 @@
 
 Simple snake written in Python.
 
+## Run
+Download release for your os, unzip it and run `jakesnake` executable inside
+
 ## Dependencies
+If you don't want to download packed release version, then you need install this dependencies.  
+Otherwise all dependencies are packed inside the release.
 
 - appdirs  
 ```
