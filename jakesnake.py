@@ -73,7 +73,7 @@ def main(screen):
 	curses.raw()
 	screen.nodelay(True)
 	
-	def draw_box(x, y, color):
+	def draw_square(x, y, color):
 		try:
 			screen.addstr(x * LINES_RATIO, y * COLS_RATIO, "██", color)
 		except:
@@ -93,12 +93,17 @@ def main(screen):
 	signal.signal(signal.SIGTERM, exit_handler)
 	
 	while True:
-		#input
-		user_input = screen.getch()
-		if KEYBINDINGS.__contains__(user_input):
-			snake.direction = KEYBINDINGS[user_input]
-		elif user_input == ord("q"):
-			snake.lost = True
+		# input
+		# while there is input available, process it
+		while True:
+			user_input = screen.getch()
+			if user_input == -1:
+				break
+			
+			if KEYBINDINGS.__contains__(user_input):
+				snake.direction = KEYBINDINGS[user_input]
+			elif user_input == ord("q"):
+				snake.lost = True
 		
 		# update
 		snake.move()
@@ -123,8 +128,8 @@ def main(screen):
 		screen.clear()
 		screen.addstr(0, 0, f"score: {snake.score}\nhi-score: {data.hiscore}")
 		for i in snake.snake:
-			draw_box(i.x, i.y, COLOR_SNAKE)
-		draw_box(snake.food.x, snake.food.y, COLOR_FOOD)
+			draw_square(i.x, i.y, COLOR_SNAKE)
+		draw_square(snake.food.x, snake.food.y, COLOR_FOOD)
 		screen.refresh()
 		
 		# sleep
