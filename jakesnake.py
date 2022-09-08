@@ -10,6 +10,21 @@ import signal
 # constants
 LINES_RATIO = 1
 COLS_RATIO = 2
+KEYBINDINGS = {
+	# UP
+	curses.KEY_UP : snakegame.SnakeDirection.UP,
+	ord("w") : snakegame.SnakeDirection.UP,
+	# DOWN
+	curses.KEY_DOWN : snakegame.SnakeDirection.DOWN,
+	ord("s") : snakegame.SnakeDirection.DOWN,
+	# LEFT
+	curses.KEY_LEFT : snakegame.SnakeDirection.LEFT,
+	ord("a") : snakegame.SnakeDirection.LEFT,
+	# RIGHT
+	curses.KEY_RIGHT : snakegame.SnakeDirection.RIGHT,
+	ord("d") : snakegame.SnakeDirection.RIGHT,
+	# exit
+}
 APP_NAME = "snake"
 APP_AUTHOR = "jakubjanik"
 DATA_PATH = appdirs.user_data_dir(APP_NAME, APP_AUTHOR)
@@ -71,23 +86,17 @@ def main(screen):
 	def exit_handler(signum, frame):
 		data.save()
 		exit()
-    if os.name == "nt":
-        signal.signal(signal.SIGBREAK, exit_handler)
-    else:
-        signal.signal(signal.SIGBREAK, exit_handler)
+	if os.name == "nt":
+		signal.signal(signal.SIGBREAK, exit_handler)
+	else:
+		signal.signal(signal.SIGHUP, exit_handler)
 	signal.signal(signal.SIGTERM, exit_handler)
 	
 	while True:
 		#input
 		user_input = screen.getch()
-		if user_input == curses.KEY_UP:
-			snake.direction = snakegame.SnakeDirection.UP
-		elif user_input == curses.KEY_DOWN:
-			snake.direction = snakegame.SnakeDirection.DOWN
-		elif user_input == curses.KEY_LEFT:
-			snake.direction = snakegame.SnakeDirection.LEFT
-		elif user_input == curses.KEY_RIGHT:
-			snake.direction = snakegame.SnakeDirection.RIGHT
+		if KEYBINDINGS.__contains__(user_input):
+			snake.direction = KEYBINDINGS[user_input]
 		elif user_input == ord("q"):
 			snake.lost = True
 		
@@ -105,7 +114,7 @@ def main(screen):
 			screen.addstr(2, 0, "You lost!")
 			screen.addstr(curses.LINES - 1, 0, "Press enter to exit...")
 			key = None
-			while key != ord("\n"):
+			while key != ord("\n") and key != ord("\r"):
 				key = screen.getch()
 			data.save()
 			return

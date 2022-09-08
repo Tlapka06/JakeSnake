@@ -9,6 +9,13 @@ Simple snake written in Python.
 pip3 install appdirs
 ```
 
+Windows only:
+
+- windows-curses  
+```
+pip3 install windows-curses
+```
+
 ## Pack
 
 JakeSnake is packed for release by PyInstaller.
